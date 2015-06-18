@@ -1,9 +1,12 @@
 FROM ubuntu:trusty
+MAINTAINER Felix Bartels "felix@host-consultants.de"
 
 # Set the env variable DEBIAN_FRONTEND to noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y curl
 
 # Entry-Script
 COPY /scripts/zarafa-init.sh /usr/local/bin/zarafa-init.sh
