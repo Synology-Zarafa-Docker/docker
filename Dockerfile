@@ -1,13 +1,15 @@
 FROM ubuntu:trusty
 
-#RUN DEBIAN_FRONTEND=noninteractive ;\
-#	apt-get update && apt-get install -y wget
+# Set the env variable DEBIAN_FRONTEND to noninteractive
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get install -y curl
 
 # Entry-Script
 COPY /scripts/zarafa-init.sh /usr/local/bin/zarafa-init.sh
 
 RUN mkdir -p /root/packages \
-	wget -q  http://download.zarafa.com/zarafa/drupal/download_platform.php?platform=beta/7.2/7.2.1-49597/zcp-7.2.1-49597-ubuntu-14.04-x86_64-forhome.tar.gz -O- \
+	&& curl -SL http://download.zarafa.com/zarafa/drupal/download_platform.php?platform=beta/7.2/7.2.1-49597/zcp-7.2.1-49597-ubuntu-14.04-x86_64-forhome.tar.gz \
 	| tar xz -C /root/packages --strip-components=1    
 
 VOLUME ["/var/lib/mysql"]
