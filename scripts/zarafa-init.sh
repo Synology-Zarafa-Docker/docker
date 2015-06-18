@@ -3,43 +3,11 @@ set -e
 
 # TODO:
 # - check for first boot
-# - ask credentials for portal.zarafa.com
-# - download zarafa home packages
-# - install them
-# - update functionality?
-
-DOWNLOAD_BASE="http://download.zarafa.com/supported/final/7.2"
-REPODIR=$HOME/zarafa-packages
-mkdir -p $REPODIR
-
-get_portal_credentials() {
-	echo "Please enter your credentials:"
-	read -p "Username: " USER
-	echo "USER=$USER" > /etc/zarafa-init-completed
-	read -p "Password: " PASSWORD
-	echo "PASSWORD=$PASSWORD" >> /etc/zarafa-init-completed
-
-	test_portal_credentials
-}
-
-test_portal_credentials() {
-	source /etc/zarafa-init-completed
-	export WGETCMD="wget --user=$USER --password=$PASSWORD --no-check-certificate"
-	export VERSION=$($WGETCMD --quiet $DOWNLOAD_BASE -O- | cut -d">" -f7 | grep "\." | grep -v final | rev | cut -c5-16 | rev | tail -1)
-	if [ -z $VERSION ]; then
-		echo "Your credentials were not correct!"
-		get_portal_credentials
-	else
-		echo "The current Zarafa version is: $VERSION"
-	fi
-}
+# - individual configuration
 
 if [ ! -e /etc/zarafa-init-completed ]; then
 	echo "This image has been started for the first time."
-	echo "To download the Zarafa for Home packages your credentials for http://portal.zarafa.com are needed."
-	echo "If you don't already have an account you can create one on the following page: https://portal.zarafa.com/user/register."
 	echo
-	get_portal_credentials
 fi
 
 case $1 in
