@@ -1,6 +1,6 @@
 FROM ubuntu:trusty
 
-#RUN apt-get update && apt-get install -y
+RUN apt-get update && apt-get install -y wget
 
 # Entry-Script
 COPY /scripts/zarafa-init.sh /usr/local/bin/zarafa-init.sh
