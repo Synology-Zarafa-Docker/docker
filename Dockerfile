@@ -1,6 +1,7 @@
 FROM ubuntu:trusty
 
-RUN apt-get update && apt-get install -y wget
+RUN DEBIAN_FRONTEND=noninteractive ;\
+	apt-get update && apt-get install -y wget
 
 # Entry-Script
 COPY /scripts/zarafa-init.sh /usr/local/bin/zarafa-init.sh

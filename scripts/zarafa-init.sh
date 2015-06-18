@@ -10,11 +10,10 @@ set -e
 
 DOWNLOAD_BASE="http://download.zarafa.com/supported/final/7.2"
 WGETCMD="wget --user=$USER --password=$PASSWORD --no-check-certificate"
-VERSION=$($WGETCMD --quiet $DOWNLOAD_BASE -O- | cut -d">" -f7 | grep "\." | grep -v final | rev | cut -c5-16 | rev| tail -1)
-REPODIR=/root/zarafa-packages
+REPODIR=$HOME/zarafa-packages
 mkdir -p $REPODIR
 
-function get_portal_credentials() {
+get_portal_credentials() {
 	echo "Please enter your credentials:"
 	read -p "Username: " USER
 	echo "USER=$USER" > /etc/zarafa-init-completed
@@ -22,11 +21,11 @@ function get_portal_credentials() {
 	echo "PASSWORD=$PASSWORD" >> /etc/zarafa-init-completed
 }
 
-function test_portal_credentials() {
-	export VERSION=$($WGETCMD --quiet $DOWNLOAD_BASE -O- | cut -d">" -f7 | grep "\." | grep -v final | rev | cut -c5-16 | rev| tail -1)
+test_portal_credentials() {
+	export VERSION=$($WGETCMD --quiet $DOWNLOAD_BASE -O- | cut -d">" -f7 | grep "\." | grep -v final | rev | cut -c5-16 | rev | tail -1)
 	if [ ! $? -eq 0 ]; then
-		echo "Your credentials seem were not correct"
-		get_portal_credentials
+		echo "Your credentials were not correct!"
+		exit 1
 	else
 		echo "The current Zarafa version is: $VERSION
 	fi
