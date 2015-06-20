@@ -15,6 +15,7 @@ stats)
 	zarafa-stats --top
 	;;
 *)
+	read
 	exec "$@"
 	;;
 esac

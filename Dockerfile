@@ -32,12 +32,12 @@ RUN apt-get update && apt-get install --allow-unauthenticated --assume-yes \
 	zarafa-webapp-titlecounter \
 	zarafa-webapp-webappmanual
 
-VOLUME ["/var/lib/mysql"]
-VOLUME ["/var/lib/zarafa"]
+VOLUME ["/etc/zarafa", "/var/lib/mysql", "/var/lib/zarafa", "/var/lib/z-push"]
 
 # Expose Ports
-EXPOSE 236 236
-EXPOSE 237 237
+#EXPOSE 25
+EXPOSE 236
+EXPOSE 237
 EXPOSE 10080 80
 EXPOSE 10443 443
 
