@@ -30,6 +30,7 @@ RUN wget --quiet -p -r -nc -nd -l 1 -e robots=off -A deb --no-check-certificate 
 RUN apt-ftparchive packages . | gzip -9c > Packages.gz && echo "deb file:/root/packages ./" > /etc/apt/sources.list.d/zarafa.list
 RUN apt-get update && apt-get install --allow-unauthenticated --assume-yes \
 	zarafa \
+	zarafa-licensed \
 	zarafa-webapp \
 	zarafa-webapp-extbox \
 	zarafa-webapp-files \
