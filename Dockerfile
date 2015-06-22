@@ -22,7 +22,7 @@ COPY /scripts/zarafa-init.sh /usr/local/bin/zarafa-init.sh
 # Downloading and installing Zarafa packages
 RUN mkdir -p /root/packages \
 	&& wget --no-check-certificate --quiet \
-	http://download.zarafa.com/zarafa/drupal/download_platform.php?platform=beta/7.2/7.2.1-49597/zcp-7.2.1-49597-ubuntu-14.04-x86_64-forhome.tar.gz -O- \
+	https://download.zarafa.com/zarafa/drupal/download_platform.php?platform=beta/7.2/7.2.1-49597/zcp-7.2.1-49597-ubuntu-14.04-x86_64-forhome.tar.gz -O- \
 	| tar xz -C /root/packages --strip-components=1
 
 WORKDIR /root/packages
@@ -45,7 +45,7 @@ RUN apt-get update && apt-get install --allow-unauthenticated --assume-yes \
 
 # Downloading and installing Z-Push
 RUN mkdir -p mkdir -p /usr/share/z-push \
-	&& wget http://download.z-push.org/beta/2.2/z-push-2.2.2beta-1972.tar.gz -O- \
+	&& wget --quiet http://download.z-push.org/beta/2.2/z-push-2.2.2beta-1972.tar.gz -O- \
 	| tar zx -C /usr/share/z-push/ --strip-components=1
 RUN mkdir -p /var/lib/z-push \
 	&& mkdir /var/log/z-push \
