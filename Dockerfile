@@ -8,9 +8,13 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y wget cron logrotate
 
+# workaround to pam error: http://stackoverflow.com/q/25193161
+RUN ln -s -f /bin/true /usr/bin/chfn
 RUN apt-get install -y mysql-server-5.6
 
 RUN apt-get install -y postfix postfix-ldap
+
+RUN apt-get install -y nginx php5-fpm
 
 # Entry-Script
 COPY /scripts/zarafa-init.sh /usr/local/bin/zarafa-init.sh
