@@ -5,8 +5,7 @@ MAINTAINER Felix Bartels "felix@host-consultants.de"
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install -y wget cron logrotate
+RUN apt-get install -y wget
 
 # workaround to pam error: http://stackoverflow.com/q/25193161
 RUN ln -s -f /bin/true /usr/bin/chfn
@@ -64,3 +63,9 @@ WORKDIR /root
 
 # Set Entrypoint
 ENTRYPOINT ["/usr/local/bin/zarafa-init.sh"]
+CMD ["stats"]
+
+# cleanup
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN rm -rf /root/packages

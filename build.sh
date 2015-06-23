@@ -12,5 +12,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	--volume /volume1/docker/zarafa/zarafalibs:/var/lib/zarafa \
 	--volume /volume1/docker/zarafa/z-push:/var/lib/z-push \
 	-p 25:25 -p 236:236 -p 237:237 -p 10080:80 -p 10443:443 \
-	-d fbartels/synology-zarafa /bin/bash
+	-d fbartels/synology-zarafa stats
 fi
