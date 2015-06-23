@@ -59,13 +59,6 @@ COPY /conf/apache-z-push.conf /etc/apache2/sites-available/z-push.conf
 # External mounts
 VOLUME ["/etc/zarafa", "/var/lib/mysql", "/var/lib/zarafa", "/var/lib/z-push"]
 
-# Expose Ports
-EXPOSE 25
-EXPOSE 236
-EXPOSE 237
-EXPOSE 10080 80
-EXPOSE 10443 443
-
 #Reset Workdir
 WORKDIR /root
 
