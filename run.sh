@@ -14,9 +14,14 @@ echo "creating data dirs"
 mkdir -p /volume1/docker/zarafa/{mysql,zarafalibs,z-push}
 
 echo "starting mysql"
-docker run --name zarafa-mysql -e MYSQL_ROOT_PASSWORD=mysecretpassword -d percona:5.6
+docker run --name zarafa-mysql -e MYSQL_ROOT_PASSWORD=mysecretpassword \
+--volume /volume1/docker/zarafa/mysql:/var/lib/mysql -d percona:5.6
 echo "starting zarafa"
 docker run --name synology-zarafa --link zarafa-mysql:mysql -it --env-file=env.conf \
 --volume /volume1/docker/zarafa/zarafalibs:/var/lib/zarafa \
 -p 25:25 -p 236:236 -p 237:237 \
-fbartels/synology-zarafa bash
+fbartels/synology-zarafa stats
+
+# stopping
+echo "stopping mysql"
+docker stop zarafa-mysql
