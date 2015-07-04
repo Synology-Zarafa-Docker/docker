@@ -16,7 +16,7 @@ fi
 
 # wait for mysql
 until $(nc -z -w5 ${MYSQL_PORT_3306_TCP_ADDR} 3306); do
-	écho "Waiting for MySQL to become available"
+	echo "Waiting for MySQL to become available"
         sleep 1
 done
 
