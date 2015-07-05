@@ -1,4 +1,4 @@
-ROM fbartels/zarafa-base
+FROM fbartels/zarafa-base
 MAINTAINER Felix Bartels "felix@host-consultants.de"
 
 RUN apt-get install -y postfix postfix-ldap
