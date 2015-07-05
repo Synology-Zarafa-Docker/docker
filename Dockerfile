@@ -3,6 +3,10 @@ MAINTAINER Felix Bartels "felix@host-consultants.de"
 
 RUN apt-get install -y postfix postfix-ldap
 
+RUN apt-get update && apt-get install --allow-unauthenticated --assume-yes \
+	zarafa \
+	zarafa-licensed
+
 # External mounts
 VOLUME ["/etc/zarafa", "/var/lib/zarafa", "/var/lib/z-push"]
 

@@ -1,4 +1,8 @@
 #!/bin/bash
+echo "updating containers"
+docker pull percona:5.6
+docker pull fbartels/synology-zarafa
+
 echo "stopping older containers"
 docker stop zarafa-mysql
 docker stop synology-zarafa
