@@ -20,7 +20,7 @@ until $(nc -z -w5 ${MYSQL_PORT_3306_TCP_ADDR} 3306); do
         sleep 1
 done
 
-services="php5-fpm nginx zarafa-server"
+services="zarafa-licensed zarafa-server"
 for s in $services; do
 	echo "starting $s"
 	service $s start
